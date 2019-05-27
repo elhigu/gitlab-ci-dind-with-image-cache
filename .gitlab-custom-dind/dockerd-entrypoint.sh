@@ -8,6 +8,10 @@ if [ ! -e /var-lib-docker.loopback.ext4 ]; then
   /sbin/mkfs.ext4 -q /var-lib-docker.loopback.ext4
 fi
 
+# TODO: create scripts to autoresize partition when docker:dind
+#       is released, which has this bugfix included 
+#       https://bugs.busybox.net/show_bug.cgi?id=11886
+
 # trim ext4 image file to smaller length if special file is found
 if [ -e /trim-ext4-on-next-start.txt ]; then
   export TRIM_GIGABYTES=$(cat /trim-ext4-on-next-start.txt)
